@@ -11,6 +11,9 @@ public class CaseDetail {
     private String subCondition;
     @Column(nullable = false)
     private String obCondition;
+    @ManyToOne(targetEntity=Case.class)
+    @JoinColumn(name="caseDetail_id",referencedColumnName="id")
+    private Case aCase;
 
     public CaseDetail(String subCondition, String obCondition) {
         this.subCondition = subCondition;
@@ -39,5 +42,13 @@ public class CaseDetail {
 
     public void setObCondition(String obCondition) {
         this.obCondition = obCondition;
+    }
+
+    public Case getaCase() {
+        return aCase;
+    }
+
+    public void setaCase(Case aCase) {
+        this.aCase = aCase;
     }
 }

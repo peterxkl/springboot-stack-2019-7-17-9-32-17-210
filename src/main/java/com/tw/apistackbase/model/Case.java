@@ -1,9 +1,8 @@
 package com.tw.apistackbase.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Case {
@@ -12,6 +11,9 @@ public class Case {
     private int id;
     private String name;
     private long time;
+    @OneToMany(targetEntity=CaseDetail.class)
+    @JoinColumn(name="caseDetail_id",referencedColumnName="id")
+    private Set<CaseDetail> caseDetails = new HashSet<>();
 
     public Case(String name, long time) {
         this.name = name;
@@ -40,5 +42,13 @@ public class Case {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public Set<CaseDetail> getCaseDetails() {
+        return caseDetails;
+    }
+
+    public void setCaseDetails(Set<CaseDetail> caseDetails) {
+        this.caseDetails = caseDetails;
     }
 }
