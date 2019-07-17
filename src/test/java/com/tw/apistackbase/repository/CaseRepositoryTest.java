@@ -2,6 +2,7 @@ package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.Case;
 import com.tw.apistackbase.model.CaseDetail;
+import com.tw.apistackbase.model.Procuratorate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class CaseRepositoryTest {
@@ -79,5 +82,17 @@ public class CaseRepositoryTest {
         cases.get(0).setCaseDetails(caseDetails);
         assertEquals(6,cases.get(0).getCaseDetails().size());
     }
+
+    @Test
+    public void should_add_All_Procuratorate(){
+        Procuratorate procuratorate = new Procuratorate("检察院1");
+        List<Case> cases1 = caseRepository.findAll();
+        //cases1.stream().map(x->x.setProcuratorate(procuratorate));
+        for(Case case1 : cases1){
+            case1.setProcuratorate(procuratorate);
+        }
+        assertEquals("检察院1",caseRepository.findAll().get(0).getProcuratorate().getProcuratotateName());
+    }
+
 
 }

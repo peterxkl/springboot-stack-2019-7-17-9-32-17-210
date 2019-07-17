@@ -14,9 +14,8 @@ public class Case {
     @OneToMany(targetEntity=CaseDetail.class)
     @JoinColumn(name="caseDetail_id",referencedColumnName="id")
     private Set<CaseDetail> caseDetails = new HashSet<>();
-    @ManyToOne(targetEntity=Procuratorate.class)
-    @JoinColumn(name="caseDetail_id",referencedColumnName="id")
-    @Column(nullable = false)
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name="case_id",referencedColumnName="procuratotateId")
     private Procuratorate procuratorate;
 
     public Case(String name, long time) {
