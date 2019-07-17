@@ -27,6 +27,7 @@ public class CaseRepositoryTest {
         cases.add(new Case("案件1",1563369057661l));
         cases.add(new Case("案件2",1563369057662l));
         cases.add(new Case("案件3",1563369057663l));
+        cases.add(new Case("案件3",1563369057664l));
         caseRepository.saveAll(cases);
     }
 
@@ -39,7 +40,14 @@ public class CaseRepositoryTest {
     @Test
     public void should_return_AllCase_when_query(){
         List<Case> cases1 = caseRepository.findAllByOrderByTimeDesc();
-        assertEquals("案件1",cases1.get(2).getName());
+        assertEquals("案件1",cases1.get(3).getName());
+
+    }
+
+    @Test
+    public void should_return_SomeCase_when_query_By_Name(){
+        List<Case> cases1 = caseRepository.findCasesByName("案件3");
+        assertEquals(2,cases1.size());
 
     }
 
