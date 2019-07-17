@@ -9,4 +9,5 @@ public interface CaseRepository extends JpaRepository<Case, Integer> {
     Case findById(int id);
     List<Case> findAllByOrderByTimeDesc();
     List<Case> findCasesByName(String name);
+    int deleteCaseById(int id);
 }

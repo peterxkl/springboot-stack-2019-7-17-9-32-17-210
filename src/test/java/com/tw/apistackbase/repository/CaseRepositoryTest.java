@@ -41,14 +41,18 @@ public class CaseRepositoryTest {
     public void should_return_AllCase_when_query(){
         List<Case> cases1 = caseRepository.findAllByOrderByTimeDesc();
         assertEquals("案件1",cases1.get(3).getName());
-
     }
 
     @Test
     public void should_return_SomeCase_when_query_By_Name(){
         List<Case> cases1 = caseRepository.findCasesByName("案件3");
         assertEquals(2,cases1.size());
+    }
 
+    @Test
+    public void should_return_number_when_delete_By_Id(){
+        int num = caseRepository.deleteCaseById(1);
+        assertEquals(1,num);
     }
 
 
