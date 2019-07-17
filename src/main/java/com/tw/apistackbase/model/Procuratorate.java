@@ -1,6 +1,8 @@
 package com.tw.apistackbase.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Procuratorate {
@@ -9,6 +11,9 @@ public class Procuratorate {
     private int procuratotateId;
     @Column(nullable = false , unique = true)
     private String procuratotateName;
+    @OneToMany(targetEntity=Case.class)
+    @JoinColumn(name="case_id",referencedColumnName="procuratotateId")
+    private Set<Case> cases = new HashSet<>();
 
     public Procuratorate(String procuratotateName) {
         this.procuratotateName = procuratotateName;
@@ -28,5 +33,13 @@ public class Procuratorate {
 
     public void setProcuratotateName(String procuratotateName) {
         this.procuratotateName = procuratotateName;
+    }
+
+    public Set<Case> getCases() {
+        return cases;
+    }
+
+    public void setCases(Set<Case> cases) {
+        this.cases = cases;
     }
 }
