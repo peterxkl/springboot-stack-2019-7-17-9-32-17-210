@@ -1,6 +1,7 @@
 package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.Case;
+import com.tw.apistackbase.model.CaseDetail;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
@@ -21,14 +20,26 @@ public class CaseRepositoryTest {
     @Autowired
     private CaseRepository caseRepository;
 
+    @Autowired
+    private CaseDetailRepository caseDetailRepository;
+
     @Before
     public void setUp(){
-        final List<Case> cases = new ArrayList<>();
+        List<Case> cases = new ArrayList<>();
         cases.add(new Case("案件1",1563369057661l));
         cases.add(new Case("案件2",1563369057662l));
         cases.add(new Case("案件3",1563369057663l));
-        cases.add(new Case("案件3",1563369057664l));
         caseRepository.saveAll(cases);
+
+        List<CaseDetail> caseDetails = new ArrayList<>();
+        caseDetails.add(new CaseDetail("aaaaa","bbbbb"));
+        caseDetails.add(new CaseDetail("ccccc","ddddd"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        //caseDetailRepository.saveAll(caseDetails);
+
     }
 
     @Test
@@ -55,6 +66,18 @@ public class CaseRepositoryTest {
         assertEquals(1,num);
     }
 
-
+    @Test
+    public void should_return_number_when_add_All_caseDetail(){
+        Set<CaseDetail> caseDetails = new HashSet<>();
+        caseDetails.add(new CaseDetail("aaaaa","bbbbb"));
+        caseDetails.add(new CaseDetail("ccccc","ddddd"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        caseDetails.add(new CaseDetail("eeeee","fffff"));
+        List<Case> cases = caseRepository.findAll();
+        cases.get(0).setCaseDetails(caseDetails);
+        assertEquals(6,cases.get(0).getCaseDetails().size());
+    }
 
 }
