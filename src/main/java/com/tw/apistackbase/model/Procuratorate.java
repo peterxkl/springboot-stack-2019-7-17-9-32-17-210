@@ -14,6 +14,9 @@ public class Procuratorate {
     @OneToMany(targetEntity=Case.class)
     @JoinColumn(name="case_id",referencedColumnName="procuratotateId")
     private Set<Case> cases = new HashSet<>();
+    @OneToMany(targetEntity=Inquisitor.class)
+    @JoinColumn(name="procuratotate_Id",referencedColumnName="procuratotateId")
+    private Set<Inquisitor> inquisitors = new HashSet<>();
 
     public Procuratorate(String procuratotateName) {
         this.procuratotateName = procuratotateName;
@@ -41,5 +44,13 @@ public class Procuratorate {
 
     public void setCases(Set<Case> cases) {
         this.cases = cases;
+    }
+
+    public Set<Inquisitor> getInquisitors() {
+        return inquisitors;
+    }
+
+    public void setInquisitors(Set<Inquisitor> inquisitors) {
+        this.inquisitors = inquisitors;
     }
 }
