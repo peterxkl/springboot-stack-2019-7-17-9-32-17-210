@@ -3,6 +3,7 @@ package com.tw.apistackbase.repository;
 import com.tw.apistackbase.model.Case;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -22,17 +23,24 @@ public class CaseRepositoryTest {
 
     @Before
     public void setUp(){
-        List<Case> cases = new ArrayList<>();
-        cases.add(new Case("案件1",new Date().getTime()));
-        cases.add(new Case("案件2",new Date().getTime()+1));
-        cases.add(new Case("案件3",new Date().getTime()+2));
+        final List<Case> cases = new ArrayList<>();
+        cases.add(new Case("案件1",1563369057661l));
+        cases.add(new Case("案件2",1563369057662l));
+        cases.add(new Case("案件3",1563369057663l));
         caseRepository.saveAll(cases);
     }
 
     @Test
-    public void should_return_Case_when_query_caseid(){
+    public void should_return_Case_when_query_caseId(){
          Case ca = caseRepository.findById(1);
          assertEquals("案件1",ca.getName());
+    }
+
+    @Test
+    public void should_return_AllCase_when_query(){
+        List<Case> cases1 = caseRepository.findAllByOrderByTimeDesc();
+        assertEquals("案件1",cases1.get(2).getName());
+
     }
 
 

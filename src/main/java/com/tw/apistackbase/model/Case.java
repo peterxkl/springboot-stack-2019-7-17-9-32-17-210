@@ -11,9 +11,9 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private Long time;
+    private long time;
 
-    public Case(String name, Long time) {
+    public Case(String name, long time) {
         this.name = name;
         this.time = time;
     }
@@ -34,11 +34,11 @@ public class Case {
         this.name = name;
     }
 
-    public Long getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(Long time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }
